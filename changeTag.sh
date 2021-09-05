@@ -1,0 +1,1 @@
+sed 's/version/$1/g' deployments.yml > versionChanged.yml
