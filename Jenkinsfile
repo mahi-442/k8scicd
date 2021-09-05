@@ -19,7 +19,7 @@ pipeline{
         }
         stage('docker build'){
             steps{
-                sh 'docker build -t hueapp/mahi9618:${DOCKER_TAG} .'
+                sh 'docker build -t mahi9618/hueapp:${DOCKER_TAG} .'
             }
         }
         stage('docker login && push'){
@@ -28,7 +28,7 @@ pipeline{
                     // some block
                     sh 'docker login -u mahi9618 -p ${dockerHubPwd}'
                 }
-                sh 'docker push hueapp/mahi9618:${DOCKER_TAG}'
+                sh 'docker push mahi9618/hueapp:${DOCKER_TAG}'
             }
         }
     }
