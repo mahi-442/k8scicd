@@ -38,6 +38,7 @@ pipeline{
                 sshagent(['kops']) {
                     // some block
                     sh 'scp -o StrictHostKeyChecking=no services.yml versionChanged.yml ec2-user@35.154.167.213: /home/ec2-user'
+                    sh 'ssh ec2-user@35.154.167.213 chmod +x .'
                     script{
                         try{
                             sh 'ssh ec2-user@35.154.167.213 sudo kubectl apply -f .'
