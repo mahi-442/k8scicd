@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: hueapp
+spec:
+  replicas: 3
+  strategy: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+selector:
+  matchLabels:
+    app: hueapp
+template:
+  metadata:
+    labels: hueapp
+  spec:
+    containers:
+      - image: hueapp/mahi9618:v1
+        name: hueapp
+        ports:
+        - containerPort: 8080
