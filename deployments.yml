@@ -16,7 +16,7 @@ template:
     labels: hueapp
   spec:
     containers:
-      - image: hueapp/mahi9618:v1
+      - image: hueapp/mahi9618:version
         name: hueapp
         ports:
         - containerPort: 8080

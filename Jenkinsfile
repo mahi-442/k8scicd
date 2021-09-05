@@ -31,6 +31,27 @@ pipeline{
                 sh 'docker push mahi9618/hueapp:${DOCKER_TAG}'
             }
         }
+        stage('k8s deploy'){
+            steps{
+                sh 'chmod +x changeTag.sh'
+                sh './changeTag.sh ${DOCKER_TAG}'
+                sshagent(['kops']) {
+                    // some block
+                    sh 'scp -o StrictHostKeyChecking=no services.yml versionChanged.yml ec2-user@35.154.167.213: /home/ec2-user'
+                    script{
+                        try{
+                            sh 'ssh ec2-user@35.154.167.213 kubectl apply -f .'
+
+                        }catch(error){
+                            sh 'ssh ec2-user@35.154.167.213 kubectl create -f .'
+
+                        }
+                        
+                    }
+                }
+
+            }
+        }
     }
 }
 def getVersion(){
