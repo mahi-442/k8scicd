@@ -40,10 +40,10 @@ pipeline{
                     sh 'scp -o StrictHostKeyChecking=no services.yml versionChanged.yml ec2-user@35.154.167.213: /home/ec2-user'
                     script{
                         try{
-                            sh 'ssh ec2-user@35.154.167.213 kubectl apply -f .'
+                            sh 'ssh ec2-user@35.154.167.213 sudo kubectl apply -f .'
 
                         }catch(error){
-                            sh 'ssh ec2-user@35.154.167.213 kubectl create -f .'
+                            sh 'ssh ec2-user@35.154.167.213 sudo kubectl create -f .'
 
                         }
                         
