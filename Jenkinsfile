@@ -14,5 +14,10 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
+        stage('docker build'){
+            steps{
+                sh 'docker build -t hueapp/mahi9618:v1 .'
+            }
+        }
     }
 }
