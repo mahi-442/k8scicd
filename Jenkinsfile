@@ -52,6 +52,14 @@ pipeline{
 
             }
         }
+        stage('sonar'){
+            steps{
+                withSonarQubeEnv(credentialsId: 'Sonar7') {
+                    // some block
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
     }
 }
 def getVersion(){
